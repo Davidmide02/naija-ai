@@ -187,8 +187,8 @@ export default function Example({
                   )}
                 </DisclosureButton>
               </div>
-              <DisclosurePanel className="sm:hidden">
-                <div className="space-y-1 px-2 pb-3 pt-2">
+              <DisclosurePanel className="md:hidden absolute left-0 top-0 h-screen bg-red-950">
+                <div className="space-y-1 px-2 pb-3 pt-2 bg-yellow-600">
                   {navigation.map((item) => (
                     <DisclosureButton
                       key={item.name}
