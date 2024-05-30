@@ -187,24 +187,30 @@ export default function Example({
                   )}
                 </DisclosureButton>
               </div>
-              <DisclosurePanel className="md:hidden absolute left-0 top-0 h-screen bg-red-950">
-                <div className="space-y-1 px-2 pb-3 pt-2 bg-yellow-600">
-                  {navigation.map((item) => (
-                    <DisclosureButton
-                      key={item.name}
-                      as="a"
-                      href={item.href}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "block rounded-md px-3 py-2 text-base font-medium"
-                      )}
-                      aria-current={item.current ? "page" : undefined}
-                    >
-                      {item.name}
-                    </DisclosureButton>
-                  ))}
+              <DisclosurePanel className="md:hidden absolute left-0 top-0 h-screen bg-gray-800">
+                <div className="bg-purple-600 h-full py-2">
+                  <div className="new-chat bg-yellow-300 h-[70%] p-2">
+                    <h3 className="">New chat here</h3>
+                  </div>
+
+                  <div className="space-y-1 px-2 pb-3 pt-2">
+                    {navigation.map((item) => (
+                      <DisclosureButton
+                        key={item.name}
+                        as="a"
+                        href={item.href}
+                        className={classNames(
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "block rounded-md px-3 py-2 text-base font-medium"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
+                      >
+                        {item.name}
+                      </DisclosureButton>
+                    ))}
+                  </div>
                 </div>
               </DisclosurePanel>
             </>
