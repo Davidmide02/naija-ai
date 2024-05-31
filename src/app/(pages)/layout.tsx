@@ -21,6 +21,7 @@ import {
   Transition,
 } from "@headlessui/react";
 import Logo from "@/components/logo";
+import Link from "next/link";
 //   import {Transition} from '@heroicons/react/20/solid'
 
 const navigation = [
@@ -55,7 +56,7 @@ export default function Layout({
   return (
     <div className="control m-auto md:grid md:grid-cols-3 text-white">
       {/* mobile menu */}
-      <div className="menu p-4 bg-gray-800 md:hidden">
+      <div className="mobile-menu p-4 bg-gray-800 md:hidden">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
             <>
@@ -102,9 +103,35 @@ export default function Layout({
           )}
         </Disclosure>
       </div>
+
+      {/* desktop menu */}
       <div className="desktop hidden md:block bg-green-400">
+        <nav className="bg-gray-800">
+          <div className="h-screen bg-gray-800">
+            <div className="h-full py-2">
+              <div className="new-chat h-[70%] p-2">
+                <h3 className="text-center">New chat here</h3>
+              </div>
 
-
+              <ul className="space-y-1 px-2 pb-3 pt-2">
+                {navigation.map((item) => (
+                  <li
+                    key={item.name}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      "block rounded-md px-3 py-2 text-base font-medium text-center"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    <Link href={item.href}>{item.name}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </nav>
       </div>
 
       {/* children */}
