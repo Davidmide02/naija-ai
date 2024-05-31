@@ -2,9 +2,10 @@ import Input from "@/components/input";
 
 const Page = () => {
   return (
-    <div className="chat bg-red-400 p-4">Chat here
+    <div className="chat p-4">
+      {/* Chat here */}
 
-    <Input/>
+      <Input />
     </div>
   );
 };
