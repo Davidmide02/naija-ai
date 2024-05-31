@@ -1,8 +1,11 @@
-import React from "react";
+import Input from "@/components/input";
 
 const Page = () => {
   return (
-    <div className="chat bg-red-400">Chat here</div>
+    <div className="chat bg-red-400 p-4">Chat here
+
+    <Input/>
+    </div>
   );
 };
 

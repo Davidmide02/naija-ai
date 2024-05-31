@@ -136,7 +136,7 @@ export default function Layout({
 
       {/* children */}
       <div className="children bg-gray-600 col-span-2 p-4 h-screen overflow-auto">
-        <div className="bg-green-500">
+        <div className="p-4 text-2xl text-center">
           <Logo />
         </div>
         {children}
