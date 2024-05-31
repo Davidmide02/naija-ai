@@ -105,9 +105,9 @@ export default function Layout({
       </div>
 
       {/* desktop menu */}
-      <div className="desktop hidden md:block bg-green-400">
-        <nav className="bg-gray-800">
-          <div className="h-screen bg-gray-800">
+      <div className="desktop hidden md:block lg">
+        <nav className="bg-gray-800 h-full p-3">
+          <div className="h-full">
             <div className="h-full py-2">
               <div className="new-chat h-[70%] p-2">
                 <h3 className="text-center">New chat here</h3>
@@ -135,7 +135,12 @@ export default function Layout({
       </div>
 
       {/* children */}
-      <div className="children bg-gray-600 col-span-2 p-4">{children}</div>
+      <div className="children bg-gray-600 col-span-2 p-4 h-screen overflow-auto">
+        <div className="bg-green-500">
+          <Logo />
+        </div>
+        {children}
+      </div>
     </div>
   );
 }

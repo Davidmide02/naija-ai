@@ -1,12 +1,9 @@
-import React from 'react'
+import React from "react";
 
 const Page = () => {
   return (
-    <div className='chat'>
+    <div className="chat bg-red-400">Chat here</div>
+  );
+};
 
-      Chat here
-    </div>
-  )
-}
-
-export default Page
+export default Page;
