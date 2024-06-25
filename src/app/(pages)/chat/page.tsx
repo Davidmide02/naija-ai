@@ -30,18 +30,8 @@ const Page = () => {
     }
   };
 
-  // The varible that store the header, payload, and method
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify("user input"),
-  };
-  // fetch function
-  // the options variable should be pass in the function below. Eg (url:string, options)
-  async function fetchData(url: string) {
-    const response = await fetch(url);
+  async function fetchData(url: string, headerInfo: RequestInit | undefined) {
+    const response = await fetch(url,headerInfo);
     if (!response.ok) {
       throw new Error(
         `Failed to fetch data from ${url}, status: ${response.status}`
@@ -54,6 +44,19 @@ const Page = () => {
 
   // fetch function end
 
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: 'Who is Barak Obama?'
+      // after testing this comment out the query above and uncomment the one below
+
+      // query: text,
+    }),
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(`input text: ${text}, uploaded pic${picture}`);
@@ -61,7 +64,8 @@ const Page = () => {
     // demo-api
     // https://jsonplaceholder.typicode.com/users
     // call function after submit
-    const data = await fetchData("https://jsonplaceholder.typicode.com/users");
+    
+    const data = await fetchData("http://0.0.0.0:3000/generate", options);
     setRes(data);
     console.log(data);
   };
