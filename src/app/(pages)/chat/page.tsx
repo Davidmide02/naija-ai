@@ -6,6 +6,7 @@ import {
   DocumentPlusIcon,
   ClipboardIcon,
 } from "@heroicons/react/24/outline";
+import axios from "axios";
 
 const Page = () => {
   const [picture, setPicture] = useState<File | null>(null);
@@ -31,7 +32,7 @@ const Page = () => {
   };
 
   async function fetchData(url: string, headerInfo: RequestInit | undefined) {
-    const response = await fetch(url,headerInfo);
+    const response = await fetch(url, headerInfo);
     if (!response.ok) {
       throw new Error(
         `Failed to fetch data from ${url}, status: ${response.status}`
@@ -42,40 +43,61 @@ const Page = () => {
     return await response.json();
   }
 
+  async function sendQueryRes(payload: { query: string }) {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    try {
+      const response = await axios.post(
+        "http://0.0.0.0:5000/generate",
+        payload,
+        { headers }
+      );
+      return response.data; // Return the data from the response
+    } catch (error) {
+      console.error("Error sending query:", error);
+      throw error; // Re-throw the error for further handling
+    }
+  }
   // fetch function end
 
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: 'Who is Barak Obama?'
-      // after testing this comment out the query above and uncomment the one below
-
-      // query: text,
-    }),
-  };
+  // const options = {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     query: 'Who is Barak Obama?'
+  //   }),
+  //   body: {query:'who is Barak Obama'}
+  // };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     console.log(`input text: ${text}, uploaded pic${picture}`);
 
-    // demo-api
-    // https://jsonplaceholder.typicode.com/users
-    // call function after submit
-    
-    const data = await fetchData("http://0.0.0.0:3000/generate", options);
-    setRes(data);
-    console.log(data);
+    const payload = {
+      query: "Who is Barak Obama?",
+      // the above query is hardcoded for testing 👆👆👆
+
+      // uncomment the query one below when tested working 👇👇👇
+      // query: text
+    };
+
+    sendQueryRes(payload)
+      .then((data) => {
+        console.log("Response data:", data);
+        setRes(data);
+      })
+      .catch((error) => {
+        console.error("Error processing response:", error);
+      });
+    // const data = await fetchData("http://0.0.0.0:3000/generate", options);
   };
 
   return (
     <div className="chat p-4">
-      {/* Chat here */}
-
-      {/* <Input /> */}
-
       <div className="border-2 border-gray-400 p-2 rounded-lg">
         {/* form */}
         <form
@@ -122,11 +144,11 @@ const Page = () => {
           </button>
         </form>
       </div>
-      
+
       {/* display  */}
       <div className="p-2 m-4">
         <p>Response:</p>
-        {res?(res): <p className="bg-gray-300">No response yet</p>}
+        {res ? res : <p className="bg-gray-300">No response yet</p>}
       </div>
     </div>
   );
